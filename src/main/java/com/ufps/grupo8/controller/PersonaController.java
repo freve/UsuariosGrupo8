@@ -58,6 +58,7 @@ public class PersonaController {
 		return new ResponseEntity<Persona>(persona, HttpStatus.OK);
 	}
 	
+	
 	@DeleteMapping(path="/persona/{documento}")
 	public ResponseEntity<Void> eliminarPersona(@PathVariable Long documento){
 		
