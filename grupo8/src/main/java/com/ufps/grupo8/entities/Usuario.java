@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Table
 public class Usuario implements Serializable{
 
+	
 	@Id
-	@GeneratedValue
 	private String nickname;
 	
 	@Column
@@ -32,11 +32,23 @@ public class Usuario implements Serializable{
 	private Persona persona;
 	@ManyToOne
 	private Rol rol;
-		
 	
 	public Usuario() {
 		
 	}
+	
+	
+
+	public Usuario(String nickname, String contraseña, String foto, Date ultimoAcceso, Rol rol) {
+		super();
+		this.nickname = nickname;
+		this.contraseña = contraseña;
+		this.foto = foto;
+		this.ultimoAcceso = ultimoAcceso;
+		this.rol = rol;
+	}
+
+
 
 	public String getNickname() {
 		return nickname;
