@@ -25,9 +25,6 @@ public class Rol implements Serializable {
 	
 	@ManyToOne
 	private Permiso permiso;
-	
-	@ManyToOne
-	private Persona persona;
 
 	
 	public Rol() {
@@ -56,12 +53,6 @@ public class Rol implements Serializable {
 	}
 	public void setPermiso(Permiso permiso) {
 		this.permiso = permiso;
-	}
-	public Persona getPersona() {
-		return persona;
-	}
-	public void setPersona(Persona persona) {
-		this.persona = persona;
 	}
 	
 }

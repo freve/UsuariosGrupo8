@@ -28,8 +28,8 @@ public class PersonaController {
 	PersonaRepository personaRepository;
 	
 	@GetMapping(path="/persona")
-	public String prueba() {
-		return "Prueba!";
+	public List<Persona> listaPersonas() {
+		return personaRepository.findAll();
 	}
 	
 	@GetMapping(path="/persona/{documento}")
@@ -44,7 +44,6 @@ public class PersonaController {
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{documento}")
 				.buildAndExpand(auxPersona.getDocumento()).toUri(); //Retorna la nueva url donde se consigue el json
-		System.out.println(ResponseEntity.created(uri).build());
 
 		return ResponseEntity.created(uri).build();
 	}
@@ -55,7 +54,7 @@ public class PersonaController {
 			return ResponseEntity.noContent().build();
 		}
 		Persona auxPersona = personaRepository.save(persona);
-		return new ResponseEntity<Persona>(persona, HttpStatus.OK);
+		return new ResponseEntity<Persona>(auxPersona, HttpStatus.OK);
 	}
 	
 	

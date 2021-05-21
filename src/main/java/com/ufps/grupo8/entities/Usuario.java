@@ -30,6 +30,7 @@ public class Usuario implements Serializable{
 	
 	@OneToOne
 	private Persona persona;
+	
 	@ManyToOne
 	private Rol rol;
 	

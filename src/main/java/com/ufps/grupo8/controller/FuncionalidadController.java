@@ -1,11 +1,12 @@
 package com.ufps.grupo8.controller;
 
 import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +20,21 @@ import com.ufps.grupo8.entities.Funcionalidad;
 import com.ufps.grupo8.repository.FuncionalidadRepository;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200", allowCredentials = "true", allowedHeaders = "*")
 public class FuncionalidadController {
 
 	@Autowired
 	FuncionalidadRepository funcionalidadRepository;
 	
 	
+	@GetMapping(path = "/funcionalidad")
+	public List<Funcionalidad> listaFuncionalidades(@PathVariable Integer id) {
+		return funcionalidadRepository.findAll();
+	}
+	
 	@GetMapping(path = "/funcionalidad/{id}")
-	public Optional<Funcionalidad> conseguir(@PathVariable Integer id) {
-		return funcionalidadRepository.findById(id);
+	public Funcionalidad conseguirFuncionalidad(@PathVariable Integer id) {
+		return funcionalidadRepository.findById(id).get();
 	}
 
 	@PostMapping(path = "/funcionalidad")
@@ -44,7 +51,7 @@ public class FuncionalidadController {
 			return ResponseEntity.noContent().build();
 		}
 		Funcionalidad auxFuncionalidad= funcionalidadRepository.save(funcionalidad);
-		return new ResponseEntity<Funcionalidad>(funcionalidad, HttpStatus.OK);
+		return new ResponseEntity<Funcionalidad>(auxFuncionalidad, HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path="/funcionalidad/{id}")
