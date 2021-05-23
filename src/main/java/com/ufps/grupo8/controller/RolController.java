@@ -50,7 +50,9 @@ public class RolController {
 	
 	@PostMapping(path="/rol")
 	public ResponseEntity<Void> agregarRol(@RequestBody Rol rol){
-		Rol auxRol= rol;		
+		Rol auxRol= rol;
+		Permiso auxPermiso = permisoRepository.findById(rol.getPermiso().getId()).get();
+		auxRol.setPermiso(auxPermiso);
 		rolRepository.save(auxRol);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(auxRol.getId()).toUri(); //Retorna la nueva url donde se consigue el json
